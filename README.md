@@ -9,6 +9,8 @@ MIDI Keyboard input for Core Keeper Instruments. Original script created by **St
 - Python
 - pip (package installer for Python)
 
+**Note**: No other active program can use the MIDI keyboard while running the script.
+
 ### Setup - First time
 
 1. Open terminal
