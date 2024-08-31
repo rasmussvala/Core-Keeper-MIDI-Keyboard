@@ -13,7 +13,7 @@ MIDI Keyboard input for Core Keeper Instruments. Original script created by **St
 
 1. Open terminal
 2. Clone repository `git clone https://github.com/rasmussvala/Core-Keeper-MIDI-Keyboard.git`
-3. Move into directory: `cd .\core_keeper_midi\` 
+3. Move into directory: `cd .\Core-Keeper-MIDI-Keyboard\` 
 4. Create virtual environment: `py -m venv .venv`
 5. Activate virtual environment: `.\.venv\Scripts\activate`
 6. Install packages: `pip install -r .\requirements.txt`
@@ -22,7 +22,7 @@ MIDI Keyboard input for Core Keeper Instruments. Original script created by **St
 ### Setup - All the other times
 
 1. Open terminal
-2. Move into `core_keeper_midi` directory
+2. Move into `Core-Keeper-MIDI-Keyboard` directory
 3. Activate virtual environment: `.\.venv\Scripts\activate`
 4. Run the script: `py .\midi_keyboard.py`
 
