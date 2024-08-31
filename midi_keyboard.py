@@ -1,8 +1,11 @@
 import mido
+from pynput import keyboard
 from pynput.keyboard import Controller
+import time
+
 
 # Create a Keyboard controller
-keyboard = Controller()
+midi_keyboard = Controller()
 
 # Create a dictionary to map MIDI notes to keyboard keys
 midi_to_key = {
@@ -32,23 +35,74 @@ midi_to_key = {
     71: "u",  # B4
 }
 
-# Get a list of all MIDI input names
-input_names = mido.get_input_names()
+# Flag to control the main loop
+running = True
 
-# Check if there are any MIDI inputs
-if not input_names:
-    print("No MIDI inputs found")
-else:
+
+def on_press(key):
+    global running
+    if key == keyboard.Key.esc:
+        print("\nExit key pressed. Stopping MIDI conversion...")
+        running = False
+        return False  # Stop the listener
+
+
+# Function to run the MIDI input processing
+def process_midi():
+    # Get a list of all MIDI input names
+    input_names = mido.get_input_names()
+
+    # Check if there are any MIDI inputs
+    if not input_names:
+        print("No MIDI inputs found")
+        return
+
+    console_message = (
+        "\n********************************************\n"
+        "MIDI conversion is running...\n"
+        f"MIDI input: {input_names[0]}\n"
+        "To exit: press [Esc]\n"
+        "********************************************"
+    )
+
+    print(console_message)
+
     # Open the first MIDI input
     with mido.open_input(input_names[0]) as inport:
-        for msg in inport:
-            # If this is a note_on message with a velocity > 0 and the note is in our dictionary...
-            if msg.type == "note_on" and msg.velocity > 0 and msg.note in midi_to_key:
-                # Trigger the equivalent keyboard key press
-                keyboard.press(midi_to_key[msg.note])
-            # If this is a note_off message or a note_on message with a velocity of zero and the note is in our dictionary...
-            elif (
-                msg.type == "note_off" or (msg.type == "note_on" and msg.velocity == 0)
-            ) and msg.note in midi_to_key:
-                # Release the equivalent keyboard key
-                keyboard.release(midi_to_key[msg.note])
+        while running:
+            # Check for MIDI messages
+            for msg in inport.iter_pending():
+                # If this is a note_on message with a velocity > 0 and the note is in our dictionary...
+                if (
+                    msg.type == "note_on"
+                    and msg.velocity > 0
+                    and msg.note in midi_to_key
+                ):
+                    # Trigger the equivalent keyboard key press
+                    midi_keyboard.press(midi_to_key[msg.note])
+                # If this is a note_off message or a note_on message with a velocity of zero and the note is in our dictionary...
+                elif (
+                    msg.type == "note_off"
+                    or (msg.type == "note_on" and msg.velocity == 0)
+                ) and msg.note in midi_to_key:
+                    # Release the equivalent keyboard key
+                    midi_keyboard.release(midi_to_key[msg.note])
+
+            # Sleep to avoid high CPU usage
+            time.sleep(0.01)
+
+
+def main():
+
+    # Start the keyboard listener in a separate thread
+    listener = keyboard.Listener(on_press=on_press)
+    listener.start()
+
+    # Run the MIDI processing in the main thread
+    process_midi()
+
+    print("MIDI conversion stopped.")
+
+
+if __name__ == "__main__":
+    main()

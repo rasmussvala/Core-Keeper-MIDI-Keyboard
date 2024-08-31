@@ -1,6 +1,6 @@
 # Core-Keeper-MIDI-Keyboard
 
-MIDI Keyboard input for Core Keeper Instruments. Original script created by Steam user Minihat. Improvements by me.
+MIDI Keyboard input for Core Keeper Instruments. Original script created by **Steam user Minihat**. Improvements by me.
 
 ## Run script on your machine
 
@@ -16,3 +16,7 @@ MIDI Keyboard input for Core Keeper Instruments. Original script created by Stea
 3. Activate virtual environment: `.\.venv\Scripts\activate`
 4. Install packages: `pip install -r .\requirements.txt`
 5. Run the script: `py .\midi_keyboard.py`
+
+### MIDI Demo
+
+![MIDI Demo](demo.gif)
