@@ -11,11 +11,13 @@ MIDI Keyboard input for Core Keeper Instruments. Original script created by **St
 
 ### Setup
 
-1. Clone repository `git clone https://github.com/rasmussvala/Core-Keeper-MIDI-Keyboard.git`
-2. Create virtual environment: `py -m venv .venv`
-3. Activate virtual environment: `.\.venv\Scripts\activate`
-4. Install packages: `pip install -r .\requirements.txt`
-5. Run the script: `py .\midi_keyboard.py`
+1. Open terminal
+2. Clone repository `git clone https://github.com/rasmussvala/Core-Keeper-MIDI-Keyboard.git`
+3. Move into directory: `cd .\core_keeper_midi\` 
+4. Create virtual environment: `py -m venv .venv`
+5. Activate virtual environment: `.\.venv\Scripts\activate`
+6. Install packages: `pip install -r .\requirements.txt`
+7. Run the script: `py .\midi_keyboard.py`
 
 ### MIDI Demo
 
