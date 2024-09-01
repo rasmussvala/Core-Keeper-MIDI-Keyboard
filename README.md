@@ -6,8 +6,8 @@ MIDI Keyboard input for Core Keeper Instruments. Original script created by **St
 
 ### Prerequisites
 
-- Python
-- pip (package installer for Python)
+- Python (download here: https://www.python.org/downloads/, **note**: important to add Python to $PATH during installation, it's a checkbox option)
+- pip (package installer for Python, gets installed with Python)
 
 **Note**: No other active program can use the MIDI keyboard while running the script.
 
